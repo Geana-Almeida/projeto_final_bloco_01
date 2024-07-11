@@ -53,7 +53,11 @@ export class ProdutoController implements ProdutoRepository{
     }
 
     pesquisar(nome: string): void {
-        throw new Error("Method not implemented.");
+        let buscaPorProduto = this.listaProduto.filter(produto => 
+            produto.nome.includes(nome)
+        );
+
+        buscaPorProduto.forEach( produto => produto.visualizar() )
     }
    
 

@@ -146,7 +146,9 @@ export function main() {
                 break;
             case 6:
                 console.log("\n\nPesquisar Produto\n\n");
-
+                console.log("Informe o nome do produto que deseja buscar:");
+                nome = readlinesync.question("");
+                produtos.pesquisar(nome);
 
                 keyPress()
                 break;
