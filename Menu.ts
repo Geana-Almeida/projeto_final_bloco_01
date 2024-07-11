@@ -1,10 +1,20 @@
 import readlinesync = require("readline-sync");
 import { colors } from "./util/Colors";
+import { Jogo } from "./src/model/Jogo";
+import { Eletronico } from "./src/model/Eletronico";
 
 
 export function main() {
 
     let opcao;
+
+    const jogo: Jogo = new Jogo(1, "God of Wars", 1, 500.00, "Playstation 4");
+    const eletronico: Eletronico = new Eletronico(2, "Geladeira", 2, 1500.00, "Eletrodomestico");
+
+    jogo.visualizar();
+    eletronico.visualizar();
+
+
 
     while (true) {
 
