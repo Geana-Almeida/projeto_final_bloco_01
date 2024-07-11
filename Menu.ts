@@ -2,19 +2,20 @@ import readlinesync = require("readline-sync");
 import { colors } from "./util/Colors";
 import { Jogo } from "./src/model/Jogo";
 import { Eletronico } from "./src/model/Eletronico";
+import { Produto } from "./src/model/Produto";
+import { ProdutoController } from "./src/controller/ProdutoController";
 
 
 export function main() {
 
-    let opcao;
+    let opcao, tipo, preco, id: number;
+    let nome, plataforma, classificacao :string;
+    const tipoProduto = ['Jogo', 'Eletronico'];
 
-    const jogo: Jogo = new Jogo(1, "God of Wars", 1, 500.00, "Playstation 4");
-    const eletronico: Eletronico = new Eletronico(2, "Geladeira", 2, 1500.00, "Eletrodomestico");
+    const produtos: ProdutoController = new ProdutoController();
 
-    jogo.visualizar();
-    eletronico.visualizar();
-
-
+    produtos.cadastrar(new Jogo (produtos.gerarNumero() , "God of Wars", 1, 500.00, "Playstation 4"));
+    produtos.cadastrar(new Eletronico(produtos.gerarNumero(), "Geladeira", 2, 1500.00, "Eletrodomestico"));
 
     while (true) {
 
@@ -49,27 +50,97 @@ export function main() {
         switch (opcao) {
             case 1:
                 console.log("\n\nCadastrar Produto\n\n");
+                
+                console.log('Digite o Nome do produto: ');
+                nome = readlinesync.question("");
 
+                console.log('Digite o preço do produto: ');
+                preco = readlinesync.questionFloat("");
+
+                console.log('Digite o Tipo do produto: ');
+                tipo = readlinesync.keyInSelect(tipoProduto, "", { cancel : false}) + 1;
+
+
+                switch(tipo){
+                    case 1:
+                        console.log('Digite a plataforma compativel com o jogo: ');
+                        plataforma = readlinesync.question("");
+                        produtos.cadastrar(
+                            new Jogo (produtos.gerarNumero() , nome, tipo, preco, plataforma)
+                        )
+                        break;
+
+                    case 2:
+                        console.log('Digite a classificação do eletronico: ');
+                        classificacao = readlinesync.question("");
+                        produtos.cadastrar(
+                            new Eletronico (produtos.gerarNumero() , nome, tipo, preco, classificacao)
+                        )
+                        break;
+                }
+                
                 keyPress();
                 break;
 
             case 2:
                 console.log('\n\nListar todos as Produtos\n\n')
-                
+                produtos.listarTodas();
                 keyPress();
                 break;
+
             case 3:
                 console.log('\n\nListar Produto pelo ID\n\n')
+                console.log("Digite o id do Produto: ");
+                id = readlinesync.questionInt('');
 
+                produtos.listarPorId(id);
                 keyPress();
                 break;
             case 4:
                 console.log("\n\nAtualizar Produto\n\n");
 
+                console.log('Digite o id do produto: ');
+                id = readlinesync.questionInt("");
+
+                let produto = produtos.buscarNoArray(id);
+
+                if(produto){
+                    console.log('Digite o Nome do produto: ');
+                    nome = readlinesync.question("");
+    
+                    console.log('Digite o preço do produto: ');
+                    preco = readlinesync.questionFloat("");
+
+                    tipo = produto.tipo;
+
+                    switch(tipo){
+                        case 1:
+                            console.log('Digite a plataforma compativel com o jogo: ');
+                            plataforma = readlinesync.question("");
+                            produtos.atualizar(
+                                new Jogo (id , nome, tipo, preco, plataforma)
+                            )
+                            break;
+    
+                        case 2:
+                            console.log('Digite a classificação do eletronico: ');
+                            classificacao = readlinesync.question("");
+                            produtos.atualizar(
+                                new Eletronico (id , nome, tipo, preco, classificacao)
+                            )
+                            break;
+                    }
+                }
+
                 keyPress()
                 break;
             case 5:
                 console.log("\n\nDeletar Produto\n\n");
+
+                console.log("Digite o id do Produto: ")
+                id = readlinesync.questionInt("");
+
+                produtos.deletar(id);
 
                 keyPress()
                 break;
