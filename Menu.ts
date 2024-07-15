@@ -12,10 +12,7 @@ export function main() {
     let nome, plataforma, classificacao :string;
     const tipoProduto = ['Jogo', 'Eletronico'];
 
-    const produtos: ProdutoController = new ProdutoController();
-
-    produtos.cadastrar(new Jogo (produtos.gerarNumero() , "God of Wars", 1, 500.00, "Playstation 4"));
-    produtos.cadastrar(new Eletronico(produtos.gerarNumero(), "Geladeira", 2, 1500.00, "Eletrodomestico"));
+    const produtos: ProdutoController = new ProdutoController(); 
 
     while (true) {
 
