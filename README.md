@@ -29,6 +29,14 @@
 * **Pesquisa de Produtos:** Oferece a funcionalidade de buscar produtos com base em critérios específicos.
 
 ## 🎥  Projeto em ação
-![Gif demonstrativo, onde é exibido a criação de dois produtos e a exibição da lista dos produtos cadastrados](assets/CriarListarProduto.gif)
+**Cadastro de Produtos:**
+![Imagem Cadastrando produto Geladeira](assets/Cadastrando1.PNG)
+![Imagem Cadastrando produto Crash](assets/Cadastrando2.PNG)
+
+**Listagem de Produtos:**
+![Imagem Cadastrando produto Crash](assets/ListandoProduto.PNG)
+
+**Consulta de Produto por ID:**
+![Imagem Cadastrando produto Crash](assets/ListandoProdutoID.PNG)
 
 
